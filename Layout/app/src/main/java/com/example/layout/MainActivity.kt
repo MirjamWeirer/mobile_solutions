@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Zugriff mittles viewBinding
+        //der onClickListner wird hier erneut zugewiesen, d.h. dieser Listner "gewinnt"
 //        binding.clickMeButton.setOnClickListener {
 //            binding.displayView.text = "I have been clicked!"
 //        }
