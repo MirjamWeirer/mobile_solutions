@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/campus02/mobile_solutions/mobile_solutions/Navigation/app/src/main/res/drawable/answer_backgorund.xml" value="0.2825" />
         <entry key="..\:/campus02/mobile_solutions/mobile_solutions/Navigation/app/src/main/res/drawable/button_background.xml" value="0.3635" />
         <entry key="..\:/campus02/mobile_solutions/mobile_solutions/Navigation/app/src/main/res/drawable/category_background_border.xml" value="0.2455" />
         <entry key="..\:/campus02/mobile_solutions/mobile_solutions/Navigation/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/campus02/mobile_solutions/mobile_solutions/Navigation/app/src/main/res/layout/fragment_category_screen.xml" value="0.25" />
+        <entry key="..\:/campus02/mobile_solutions/mobile_solutions/Navigation/app/src/main/res/layout/fragment_game_screen.xml" value="0.23958333333333334" />
         <entry key="..\:/campus02/mobile_solutions/mobile_solutions/Navigation/app/src/main/res/layout/fragment_start_screen.xml" value="0.3625" />
       </map>
     </option>

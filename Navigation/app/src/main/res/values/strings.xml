@@ -8,4 +8,9 @@
     <string name="historyLabel">History</string>
     <string name="generalLabel">General</string>
     <string name="computerLabel">Computer</string>
+    <string name="question_text">Question Text</string>
+    <string name="answer_a">Answer A</string>
+    <string name="answer_b">Answer B</string>
+    <string name="answer_c">Answer C</string>
+    <string name="answer_d">Answer D</string>
 </resources>
