@@ -1,5 +1,6 @@
 package com.example.layout
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -30,7 +31,11 @@ class MainActivity : AppCompatActivity() {
         //OnClickListner zuweisen (es gibt mehrere Methoden, siehe dazu Skriptum)
         // -> das hier ist die Lambda Methode
         clickMeButton.setOnClickListener {
+            //man wird es nicht lange sehen da in nächste acrtivity gewechselt wird
             displayView.text = "I have been clicked (old)!"
+
+            val intent = Intent(this, CategoryActivity::class.java)
+            startActivity(intent)
         }
 
         //Zugriff mittles viewBinding
