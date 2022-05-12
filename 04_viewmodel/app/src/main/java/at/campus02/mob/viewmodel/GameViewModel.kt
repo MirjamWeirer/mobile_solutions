@@ -104,6 +104,7 @@ class GameViewModel : ViewModel() {
 
     //User Aktionen
     fun start() {
+        index = 0
         questionsMutable.value = theQuestions
         questionMutable.value = questionsMutable.value?.get(index)
         updateButtonMakers()
