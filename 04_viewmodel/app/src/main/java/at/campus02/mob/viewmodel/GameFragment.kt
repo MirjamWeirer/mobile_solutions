@@ -53,5 +53,8 @@ class GameFragment : Fragment() {
         binding.button4Layout.setOnClickListener {
             gameViewModel.chooseAnswer(Choice.D)
         }
+        binding.continueButtonLayout.setOnClickListener {
+            gameViewModel.next()
+        }
     }
 }

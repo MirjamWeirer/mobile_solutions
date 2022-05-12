@@ -35,15 +35,53 @@ data class Question(
     val isCorrect get() = isAnswered && choice == correctChoice
 }
 
-private val theQuestion: Question get() = Question(
-    question = "How is the weather today?",
-    correct_answer = "Sunny",
-    incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")
+private val theQuestions: List<Question> get() = listOf(
+    Question(
+        question = "How is the weather today 1?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 2?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 3?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 4?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 5?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather toda 6y?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 7?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 8?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 9?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
+    Question(
+        question = "How is the weather today 10?",
+        correct_answer = "Sunny",
+        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
 )
 
 class GameViewModel : ViewModel() {
     //intern, veränderbar
-    private var questionMutable: MutableLiveData<Question> = MutableLiveData(theQuestion)
+    private var questionsMutable: MutableLiveData<List<Question>> = MutableLiveData()
+    private var questionMutable: MutableLiveData<Question> = MutableLiveData()
     private var buttonMarkersMutable: MutableLiveData<Map<Choice, Int>> = MutableLiveData(mapOf(
         Choice.A to R.drawable.button_background,
         Choice.B to R.drawable.button_background,
@@ -52,16 +90,36 @@ class GameViewModel : ViewModel() {
     ))
 
     //von außen sichtbar, aber nicht veränderbar
+    val questions: LiveData<List<Question>> get() = questionsMutable
     val question: LiveData<Question> get() = questionMutable
     val buttonMakers: LiveData<Map<Choice, Int>> get() = buttonMarkersMutable
 
+    //index auf den Fragen
+    private var index = 0
+
     //User Aktionen
+    fun start() {
+       questionsMutable.value = theQuestions
+       questionMutable.value = questionsMutable.value?.get(index)
+    }
+
     fun chooseAnswer(choice: Choice) {
         if(question.value?.isAnswered != true) {
             question.value?.choose(choice)
             updateButtonMakers()
         }
     }
+
+    fun next() {
+        if (question.value?.isAnswered == true){
+            index++
+            if(index < (questions.value?.size ?: 0)){
+                questionMutable.value = questions.value?.get(index)
+                updateButtonMakers()
+            }
+        }
+    }
+
     //Hilfsmethoden
     private fun updateButtonMakers() {
         //hier würde ich gerne buttonMakersMutable.value entsprechend setzen
@@ -77,6 +135,8 @@ class GameViewModel : ViewModel() {
         return when {
             //keine Frage vorhanden: alle Buttons neutral
             question == null -> R.drawable.button_background
+            //Frage noch nicht beantwortet: alle Buttons neutral
+            !question.isAnswered -> R.drawable.button_background
             //Button entspricht der richtigen Antwort und die Frage wurde korrekt beantwortet: grün
             question.isCorrect && choice == question.correctChoice -> R.drawable.button_background_correct
             //Button entspricht der falsch gegebener Antwort
