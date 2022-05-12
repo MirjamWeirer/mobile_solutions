@@ -90,12 +90,14 @@ class GameViewModel : ViewModel() {
         Choice.D to R.drawable.button_background,
     ))
     private  var guessingProgressMutable: MutableLiveData<Int> = MutableLiveData(0)
+    private var scoreMutable: MutableLiveData<String> = MutableLiveData()
 
     //von außen sichtbar, aber nicht veränderbar
     val questions: LiveData<List<Question>> get() = questionsMutable
     val question: LiveData<Question> get() = questionMutable
     val buttonMakers: LiveData<Map<Choice, Int>> get() = buttonMarkersMutable
     val guessingProcess: LiveData<Int> get() = guessingProgressMutable
+    val score: LiveData<String> get() = scoreMutable
 
     //index auf den Fragen
     private var index = 0
@@ -106,6 +108,7 @@ class GameViewModel : ViewModel() {
         questionMutable.value = questionsMutable.value?.get(index)
         updateButtonMakers()
         guessingCountDownTimer.start()
+        updateScore()
     }
 
     fun chooseAnswer(choice: Choice) {
@@ -113,6 +116,7 @@ class GameViewModel : ViewModel() {
             question.value?.choose(choice)
             updateButtonMakers()
             guessingCountDownTimer.cancel()
+            updateScore()
         }
     }
 
@@ -153,6 +157,15 @@ class GameViewModel : ViewModel() {
         }
     }
     //Hilfsmethoden
+    private fun updateScore() {
+        val allQuestions = questionsMutable.value ?: return
+        if (allQuestions.all {it.isAnswered}){
+            scoreMutable.value = "Score: ${allQuestions.count {it.isCorrect}} / ${allQuestions.size} correct"
+        }else {
+            scoreMutable.value = null
+        }
+    }
+
     private fun updateButtonMakers() {
         //hier würde ich gerne buttonMakersMutable.value entsprechend setzen
         buttonMarkersMutable.value = mapOf(
