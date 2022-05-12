@@ -33,5 +33,25 @@ class GameFragment : Fragment() {
             binding.button3Label.text = question.answerC
             binding.button4Label.text = question.answerD
         }
+        gameViewModel.buttonMakers.observe(this){buttonMarkerMap ->
+            binding.button1Layout.setBackgroundResource(buttonMarkerMap[Choice.A] ?: R.drawable.button_background)
+            binding.button2Layout.setBackgroundResource(buttonMarkerMap[Choice.B] ?: R.drawable.button_background)
+            binding.button3Layout.setBackgroundResource(buttonMarkerMap[Choice.C] ?: R.drawable.button_background)
+            binding.button4Layout.setBackgroundResource(buttonMarkerMap[Choice.D] ?: R.drawable.button_background)
+        }
+
+        //User Aktionen
+        binding.button1Layout.setOnClickListener {
+            gameViewModel.chooseAnswer(Choice.A)
+        }
+        binding.button2Layout.setOnClickListener {
+            gameViewModel.chooseAnswer(Choice.B)
+        }
+        binding.button3Layout.setOnClickListener {
+            gameViewModel.chooseAnswer(Choice.C)
+        }
+        binding.button4Layout.setOnClickListener {
+            gameViewModel.chooseAnswer(Choice.D)
+        }
     }
 }
