@@ -39,6 +39,10 @@ class GameFragment : Fragment() {
             binding.button3Layout.setBackgroundResource(buttonMarkerMap[Choice.C] ?: R.drawable.button_background)
             binding.button4Layout.setBackgroundResource(buttonMarkerMap[Choice.D] ?: R.drawable.button_background)
         }
+        gameViewModel.guessingProcess.observe(this){progressValue ->
+            binding.progressBar.progress = progressValue
+            binding.progressBar.visibility = if (progressValue > 0) View.VISIBLE else View.INVISIBLE
+        }
 
         //User Aktionen
         binding.button1Layout.setOnClickListener {

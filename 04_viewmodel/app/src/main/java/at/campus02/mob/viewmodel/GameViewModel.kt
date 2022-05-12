@@ -1,11 +1,12 @@
 package at.campus02.mob.viewmodel
 
+import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 enum class Choice {
-    A, B, C, D
+    A, B, C, D, NONE
 }
 
 data class Question(
@@ -88,25 +89,30 @@ class GameViewModel : ViewModel() {
         Choice.C to R.drawable.button_background,
         Choice.D to R.drawable.button_background,
     ))
+    private  var guessingProgressMutable: MutableLiveData<Int> = MutableLiveData(0)
 
     //von außen sichtbar, aber nicht veränderbar
     val questions: LiveData<List<Question>> get() = questionsMutable
     val question: LiveData<Question> get() = questionMutable
     val buttonMakers: LiveData<Map<Choice, Int>> get() = buttonMarkersMutable
+    val guessingProcess: LiveData<Int> get() = guessingProgressMutable
 
     //index auf den Fragen
     private var index = 0
 
     //User Aktionen
     fun start() {
-       questionsMutable.value = theQuestions
-       questionMutable.value = questionsMutable.value?.get(index)
+        questionsMutable.value = theQuestions
+        questionMutable.value = questionsMutable.value?.get(index)
+        updateButtonMakers()
+        guessingCountDownTimer.start()
     }
 
     fun chooseAnswer(choice: Choice) {
         if(question.value?.isAnswered != true) {
             question.value?.choose(choice)
             updateButtonMakers()
+            guessingCountDownTimer.cancel()
         }
     }
 
@@ -114,12 +120,38 @@ class GameViewModel : ViewModel() {
         if (question.value?.isAnswered == true){
             index++
             if(index < (questions.value?.size ?: 0)){
-                questionMutable.value = questions.value?.get(index)
+                questionMutable.value = questionsMutable.value?.get(index)
                 updateButtonMakers()
+                guessingCountDownTimer.start()
             }
         }
     }
 
+    private val guessingCountDownTimer = object {
+        private lateinit var countDownTimer: CountDownTimer
+
+        fun start() {
+            guessingProgressMutable.value = 100
+            countDownTimer = object : CountDownTimer(10_000, 500){
+                override fun onTick(remainingMillis: Long) {
+                    guessingProgressMutable.value = ((remainingMillis / 10_000.0) * 100).toInt()
+                }
+
+                override fun onFinish() {
+                    guessingProgressMutable.value = 0
+                    if (question.value?.isAnswered == false)
+                        chooseAnswer(Choice.NONE)
+                }
+
+            }
+            countDownTimer.start()
+        }
+
+        fun cancel() {
+            guessingProgressMutable.value = 0
+            countDownTimer.cancel()
+        }
+    }
     //Hilfsmethoden
     private fun updateButtonMakers() {
         //hier würde ich gerne buttonMakersMutable.value entsprechend setzen
