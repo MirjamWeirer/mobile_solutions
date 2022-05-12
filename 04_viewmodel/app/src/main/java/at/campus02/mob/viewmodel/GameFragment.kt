@@ -5,16 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import at.campus02.mob.viewmodel.R
+import at.campus02.mob.viewmodel.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
+
+    private lateinit var binding: FragmentGameBinding
+    private val gameViewModel: GameViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game, container, false)
+    ): View {
+       binding = FragmentGameBinding.inflate(inflater)
+        return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        //Observers
+        gameViewModel.question.observe(this){question ->
+            binding.questionText.text = question.question
+            binding.button1Label.text = question.answerA
+            binding.button2Label.text = question.answerB
+            binding.button3Label.text = question.answerC
+            binding.button4Label.text = question.answerD
+        }
+    }
 }
