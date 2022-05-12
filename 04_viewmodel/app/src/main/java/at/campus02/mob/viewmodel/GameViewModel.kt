@@ -58,7 +58,7 @@ private val theQuestions: List<Question> get() = listOf(
         correct_answer = "Sunny",
         incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
     Question(
-        question = "How is the weather toda 6y?",
+        question = "How is the weather toda 6?",
         correct_answer = "Sunny",
         incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
     Question(
@@ -91,6 +91,7 @@ class GameViewModel : ViewModel() {
     ))
     private  var guessingProgressMutable: MutableLiveData<Int> = MutableLiveData(0)
     private var scoreMutable: MutableLiveData<String> = MutableLiveData()
+    private var progressMarkersMutable: MutableLiveData<List<Int>> = MutableLiveData()
 
     //von außen sichtbar, aber nicht veränderbar
     val questions: LiveData<List<Question>> get() = questionsMutable
@@ -98,6 +99,7 @@ class GameViewModel : ViewModel() {
     val buttonMakers: LiveData<Map<Choice, Int>> get() = buttonMarkersMutable
     val guessingProcess: LiveData<Int> get() = guessingProgressMutable
     val score: LiveData<String> get() = scoreMutable
+    val progressMarkers: LiveData<List<Int>> get() = progressMarkersMutable
 
     //index auf den Fragen
     private var index = 0
@@ -110,6 +112,7 @@ class GameViewModel : ViewModel() {
         updateButtonMakers()
         guessingCountDownTimer.start()
         updateScore()
+        updateProgressMarkers()
     }
 
     fun chooseAnswer(choice: Choice) {
@@ -118,6 +121,7 @@ class GameViewModel : ViewModel() {
             updateButtonMakers()
             guessingCountDownTimer.cancel()
             updateScore()
+            updateProgressMarkers()
         }
     }
 
@@ -128,6 +132,7 @@ class GameViewModel : ViewModel() {
                 questionMutable.value = questionsMutable.value?.get(index)
                 updateButtonMakers()
                 guessingCountDownTimer.start()
+                updateProgressMarkers()
             }
         }
     }
@@ -191,6 +196,29 @@ class GameViewModel : ViewModel() {
             !question.isCorrect && choice == question.correctChoice -> R.drawable.button_background_hint
             //falls kein anderer Fall zuständig: neutral
             else -> R.drawable.button_background
+        }
+    }
+    private fun updateProgressMarkers() {
+        progressMarkersMutable.value = listOf(
+            progressResourceFor(0),
+            progressResourceFor(1),
+            progressResourceFor(2),
+            progressResourceFor(3),
+            progressResourceFor(4),
+            progressResourceFor(5),
+            progressResourceFor(6),
+            progressResourceFor(7),
+            progressResourceFor(8),
+            progressResourceFor(9),
+        )
+    }
+
+    private fun progressResourceFor(index: Int): Int {
+        val progressQuestion = questions.value?.get(index)
+        return when {
+            progressQuestion == null -> R.drawable.progress_unanswered
+            progressQuestion == question.value -> R.drawable.progress_current
+            else -> R.drawable.progress_unanswered
         }
     }
 }
