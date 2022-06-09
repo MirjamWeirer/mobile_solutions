@@ -108,7 +108,7 @@ class GameViewModel @Inject constructor(
                     updateProgressMarkers()
                     updateScore()
                     guessingCountDownTimer.start()
-                    selectQuestion(index)
+
                 }
             } catch (exc: Exception) {
                 errorMutable.postValue(exc.message)
@@ -123,6 +123,7 @@ class GameViewModel @Inject constructor(
             updateProgressMarkers()
             guessingCountDownTimer.cancel()
             updateScore()
+            selectQuestion(index)
         }
     }
 
@@ -171,6 +172,7 @@ class GameViewModel @Inject constructor(
         val allQuestions = questionsMutable.value ?: return
         if (allQuestions.all { it.isAnswered }) {
             scoreMutable.value = "Score: ${allQuestions.count { it.isCorrect }} / ${allQuestions.size} correct"
+            selectQuestion(index)
         } else {
             scoreMutable.value = null
         }
