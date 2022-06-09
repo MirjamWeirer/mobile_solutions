@@ -8,9 +8,11 @@ import javax.inject.Inject
 @HiltAndroidApp
 class QuizApplication : Application()
 
-class QuestionRepository @Inject constructor(){
+class QuestionRepository @Inject constructor(
+    val api: TriviaDbApi
+){
     suspend fun getQuestions(): List<Question>{
-        val response = triviaDbApi.getQuestionsWithCoroutines(10)
+        val response = api.getQuestionsWithCoroutines(10)
         if (response.isSuccessful) {
             val questions =
                 response.body()?.results ?: throw IllegalStateException("No questions received")
