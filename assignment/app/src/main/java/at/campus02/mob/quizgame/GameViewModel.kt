@@ -109,6 +109,7 @@ class GameViewModel @Inject constructor(
                     updateScore()
                     guessingCountDownTimer.start()
 
+
                 }
             } catch (exc: Exception) {
                 errorMutable.postValue(exc.message)
@@ -123,7 +124,7 @@ class GameViewModel @Inject constructor(
             updateProgressMarkers()
             guessingCountDownTimer.cancel()
             updateScore()
-            selectQuestion(index)
+
         }
     }
 
