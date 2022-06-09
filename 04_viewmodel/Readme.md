@@ -51,3 +51,4 @@ Wir verwenden dazu die frei verfügbare Quiz-Datenbank [Open Trivia Database](ht
 * Error-Handling: Bei Fehlern während der Kommunikation mit dem Rest API soll eine entsprechende Fehlermeldung (weiß auf rotem Hintergrund) angezeigt werden.
 * Umstellen  des API von "Call" auf Kotlin coroutines.
     * Einführen eines Query-Paramters  für die Anzal der fragen (10 verwenden)
+ * Umstellen auf Dependency Injection und Repository
