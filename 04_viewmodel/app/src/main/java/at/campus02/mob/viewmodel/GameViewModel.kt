@@ -18,12 +18,18 @@ data class Question(
     private val correct_answer: String,
     private val incorrect_answers: List<String>
 ) {
-    private val randomizedAnswers = (incorrect_answers + correct_answer).shuffled()
-    val answerA = randomizedAnswers[0]
-    val answerB = randomizedAnswers[1]
-    val answerC = randomizedAnswers[2]
-    val answerD = randomizedAnswers[3]
-    val correctChoice = when(correct_answer) {
+    private var _randomizedAnswers: List<String>? = null
+    private val randomizedAnswers: List<String> get() {
+        if (_randomizedAnswers == null) {
+            _randomizedAnswers = (incorrect_answers + correct_answer).shuffled()
+        }
+        return _randomizedAnswers!!
+    }
+    val answerA get() = randomizedAnswers[0]
+    val answerB get() = randomizedAnswers[1]
+    val answerC get() = randomizedAnswers[2]
+    val answerD get() = randomizedAnswers[3]
+    val correctChoice get() = when(correct_answer) {
         answerA -> Choice.A
         answerB -> Choice.B
         answerC -> Choice.C
