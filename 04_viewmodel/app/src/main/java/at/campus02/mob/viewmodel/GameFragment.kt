@@ -65,6 +65,15 @@ class GameFragment : Fragment() {
                 view.setBackgroundResource(markers[index])
             }
         }
+        gameViewModel.error.observe(this){errorMessage ->
+            if (errorMessage == null){
+                binding.errorMessage.text = null
+                binding.errorMessage.visibility = View.GONE
+            }else{
+                binding.errorMessage.text = errorMessage
+                binding.errorMessage.visibility = View.VISIBLE
+            }
+        }
 
         // User Aktionen
         binding.button1Layout.setOnClickListener {

@@ -60,6 +60,7 @@ class GameViewModel : ViewModel() {
     private var guessingProgressMutable: MutableLiveData<Int> = MutableLiveData(0)
     private var scoreMutable: MutableLiveData<String> = MutableLiveData()
     private var progressMarkersMutable: MutableLiveData<List<Int>> = MutableLiveData()
+    private var errorMutable: MutableLiveData<String> = MutableLiveData()
 
     // von außen sichtbar, aber nicht veränderbar
     val questions: LiveData<List<Question>> get() = questionsMutable
@@ -68,12 +69,15 @@ class GameViewModel : ViewModel() {
     val guessingProgress: LiveData<Int> get() = guessingProgressMutable
     val score: LiveData<String> get() = scoreMutable
     val progressMarkers: LiveData<List<Int>> get() = progressMarkersMutable
+    val error: LiveData<String> get() = errorMutable
 
     // index auf den Fragen
     private var index = 0
 
     // User Aktionen
     fun start() {
+
+        errorMutable.value = null
 
         // REST access mit "Call" Interface
         triviaDbApi.getQuestions().enqueue(object: Callback<QuestionsResponse> {
@@ -90,11 +94,13 @@ class GameViewModel : ViewModel() {
                     updateProgressMarkers()
                     updateScore()
                     guessingCountDownTimer.start()
+                } else {
+                    errorMutable.value = "Error when fetching questions: ${response.message()}"
                 }
             }
 
             override fun onFailure(call: Call<QuestionsResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                errorMutable.value = "Communication failure: ${t.message}"
             }
         })
 
