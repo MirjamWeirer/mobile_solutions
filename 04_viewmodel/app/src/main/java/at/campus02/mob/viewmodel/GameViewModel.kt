@@ -46,49 +46,6 @@ data class Question(
     val isCorrect get() = isAnswered && choice == correctChoice
 }
 
-private val theQuestions: List<Question> get() = listOf(
-    Question(
-        question = "How is the weather today 1?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 2?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 3?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 4?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 5?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 6?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 7?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 8?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 9?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-    Question(
-        question = "How is the weather today 10?",
-        correct_answer = "Sunny",
-        incorrect_answers = listOf("Rainy", "Foggy", "Cloudy")),
-)
-
 class GameViewModel : ViewModel() {
 
     // intern, veränderbar
