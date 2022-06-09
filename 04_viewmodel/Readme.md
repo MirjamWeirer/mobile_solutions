@@ -48,3 +48,6 @@ Wir verwenden dazu die frei verfügbare Quiz-Datenbank [Open Trivia Database](ht
 * Verwenden des APIs im ``GameViewModel``, um die Fragen bei Start des Spiels zu laden. 
 	* Bei Verwendung von ``suspend`` functions darf das nicht im Main-Thread erfolgen!
 * Aufräumen: Die vordefinierte Liste der Fragen (``theQuestions``) entfernen.
+* Error-Handling: Bei Fehlern während der Kommunikation mit dem Rest API soll eine entsprechende Fehlermeldung (weiß auf rotem Hintergrund) angezeigt werden.
+* Umstellen  des API von "Call" auf Kotlin coroutines.
+    * Einführen eines Query-Paramters  für die Anzal der fragen (10 verwenden)
