@@ -29,5 +29,17 @@ class CategoryScreenFragment : Fragment() {
             findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
                gameViewModel.start()
         }
+        binding.scienceCategoryButton.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
+            gameViewModel.start()
+        }
+        binding.computerCategoryButton.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
+            gameViewModel.start()
+        }
+        binding.knowledgeCategoryButton.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
+            gameViewModel.start()
+        }
     }
 }
