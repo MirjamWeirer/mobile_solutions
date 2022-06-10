@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class StartFragment : Fragment() {
 
     private lateinit var binding: FragmentStartBinding
-    private val gameViewModel: GameViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +27,8 @@ class StartFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.startButton.setOnClickListener {
-            findNavController().navigate(R.id.action_startFragment_to_gameFragment)
-            gameViewModel.start()
+            findNavController().navigate(R.id.action_startFragment_to_categoryScreenFragment)
+         //   gameViewModel.start()
         }
         binding.settingsButton.setOnClickListener {
             findNavController().navigate(R.id.action_startFragment_to_settingsFragment)
