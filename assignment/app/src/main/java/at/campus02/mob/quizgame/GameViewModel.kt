@@ -78,6 +78,7 @@ class GameViewModel @Inject constructor(
     private var progressMarkersMutable: MutableLiveData<List<Int>> = MutableLiveData()
     private var errorMutable: MutableLiveData<String> = MutableLiveData()
 
+
     // ---------------------------------------------------------------------------------------------
     // von außen sichtbar, aber nicht veränderbar
     val questions: LiveData<List<Question>> get() = questionsMutable
@@ -94,12 +95,12 @@ class GameViewModel @Inject constructor(
     // ---------------------------------------------------------------------------------------------
     // User Aktionen
     // ---------------------------------------------------------------------------------------------
-    fun start() {
+    fun start(categoryId: Int) {
         errorMutable.value = null
         // REST access mit kotlin coroutines
         viewModelScope.launch {
             try {
-                val questionsFromServer = questionRepository.getQuestions()
+                val questionsFromServer = questionRepository.getQuestions(categoryId)
                 MainScope().launch {
                     index = 0
                     questionsMutable.value = questionsFromServer

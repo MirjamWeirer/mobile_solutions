@@ -27,19 +27,19 @@ class CategoryScreenFragment : Fragment() {
         super.onStart()
         binding.historyCategoryButton.setOnClickListener {
             findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
-               gameViewModel.start()
+               gameViewModel.start(23)
         }
         binding.scienceCategoryButton.setOnClickListener {
             findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
-            gameViewModel.start()
+            gameViewModel.start(17)
         }
         binding.computerCategoryButton.setOnClickListener {
             findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
-            gameViewModel.start()
+            gameViewModel.start(18)
         }
         binding.knowledgeCategoryButton.setOnClickListener {
             findNavController().navigate(R.id.action_categoryScreenFragment_to_gameFragment)
-            gameViewModel.start()
+            gameViewModel.start(9)
         }
     }
 }

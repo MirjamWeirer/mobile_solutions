@@ -30,8 +30,8 @@ class QuestionRepository @Inject constructor(
     val api: TriviaDbApi
 )  {
 
-    suspend fun getQuestions(): List<Question> {
-        val response = api.getQuestions()
+    suspend fun getQuestions(categoryId: Int): List<Question> {
+        val response = api.getQuestionsForCategory(categoryId)
         if (response.isSuccessful) {
             val questions = response.body()?.results ?: throw IllegalStateException("No questions received.")
             if (questions.size != 10) {
