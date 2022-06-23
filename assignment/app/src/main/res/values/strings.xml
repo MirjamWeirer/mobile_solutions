@@ -12,4 +12,5 @@
     <string name="scienceLabel">Science</string>
     <string name="historyLabel">History</string>
     <string name="generalLabel">General</string>
+    <string name="computer">Computer</string>
 </resources>

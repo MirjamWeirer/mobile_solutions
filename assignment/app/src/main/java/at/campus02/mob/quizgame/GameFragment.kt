@@ -80,6 +80,7 @@ class GameFragment : Fragment() {
         }
 
 
+
         // User Aktionen
         binding.button1Layout.setOnClickListener {
             gameViewModel.chooseAnswer(Choice.A)
@@ -97,18 +98,35 @@ class GameFragment : Fragment() {
         binding.continueButtonLayout.setOnClickListener {
             gameViewModel.next()
         }
-
-        binding.progress.setOnClickListener{
-            progressIndicators.indexOf(binding.p1)
-            progressIndicators.indexOf(binding.p2)
-            progressIndicators.indexOf(binding.p3)
-            progressIndicators.indexOf(binding.p4)
-            progressIndicators.indexOf(binding.p5)
-            progressIndicators.indexOf(binding.p6)
-            progressIndicators.indexOf(binding.p7)
-            progressIndicators.indexOf(binding.p8)
-            progressIndicators.indexOf(binding.p9)
-            progressIndicators.indexOf(binding.p10)
+        binding.p1.setOnClickListener{
+             gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p1))
+        }
+        binding.p2.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p2))
+        }
+        binding.p3.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p3))
+        }
+        binding.p4.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p4))
+        }
+        binding.p5.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p5))
+        }
+        binding.p6.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p6))
+        }
+        binding.p7.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p7))
+        }
+        binding.p8.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p8))
+        }
+        binding.p9.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p9))
+        }
+        binding.p10.setOnClickListener{
+            gameViewModel.selectQuestion(progressIndicators.indexOf(binding.p10))
         }
     }
 }

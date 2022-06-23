@@ -126,6 +126,7 @@ class GameViewModel @Inject constructor(
             guessingCountDownTimer.cancel()
             updateScore()
 
+
         }
     }
 
@@ -174,7 +175,6 @@ class GameViewModel @Inject constructor(
         val allQuestions = questionsMutable.value ?: return
         if (allQuestions.all { it.isAnswered }) {
             scoreMutable.value = "Score: ${allQuestions.count { it.isCorrect }} / ${allQuestions.size} correct"
-            selectQuestion(index)
         } else {
             scoreMutable.value = null
         }
@@ -241,10 +241,11 @@ class GameViewModel @Inject constructor(
             else -> R.drawable.progress_unanswered
         }
     }
-    private fun selectQuestion(index: Int){
+     fun selectQuestion(index: Int){
         val allQuestions = questionMutable.value ?: return
         if (allQuestions.isAnswered) {
-            progressMarkersMutable.value?.get(index)
+            questionMutable.value = questionsMutable.value?.get(index)
+            updateButtonMarkers()
         }
     }
 }
