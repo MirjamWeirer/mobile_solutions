@@ -45,6 +45,11 @@ class GameFragment : Fragment() {
 
         // Observers
         gameViewModel.question.observe(this) { question ->
+            if (question == null) {
+                R.drawable.button_background
+                R.drawable.progress_unanswered
+                return@observe
+            }
             binding.questionText.text = Html.fromHtml(question.question, Html.FROM_HTML_MODE_LEGACY)
             binding.button1Label.text = Html.fromHtml(question.answerA, Html.FROM_HTML_MODE_LEGACY)
             binding.button2Label.text = Html.fromHtml(question.answerB, Html.FROM_HTML_MODE_LEGACY)

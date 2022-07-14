@@ -96,7 +96,13 @@ class GameViewModel @Inject constructor(
     // User Aktionen
     // ---------------------------------------------------------------------------------------------
     fun start(categoryId: Int) {
+
         errorMutable.value = null
+        if (questionsMutable.value != null) {
+
+            questionMutable.value = null
+           // buttonResourceFor(questionMutable.value, Choice.NONE )
+        }
         // REST access mit kotlin coroutines
         viewModelScope.launch {
             try {
@@ -149,6 +155,7 @@ class GameViewModel @Inject constructor(
         private lateinit var countDownTimer: CountDownTimer
 
         fun start() {
+            if (this::countDownTimer.isInitialized) countDownTimer.cancel()
             val timeInMs = preferencesRepository.getTimerDuration()
             guessingProgressMutable.value = 100
             countDownTimer = object : CountDownTimer(timeInMs, 500) {
